@@ -1,0 +1,1 @@
+export const SATELITE_ID = process.env.NEXT_PUBLIC_JUNO_SATELITE || ''
