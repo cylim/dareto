@@ -47,7 +47,7 @@ export const Modal = () => {
       const key = nanoid();
 
       await setDoc({
-        collection: "notes",
+        collection: "tasks",
         doc: {
           key,
           data: {

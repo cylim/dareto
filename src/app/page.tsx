@@ -2,9 +2,9 @@
 
 import { useEffect } from "react";
 import { initJuno } from "@junobuild/core-peer";
-import { Auth } from "@/app/components/Auth";
-import { Table } from "@/app/components/Table";
-import { Modal } from "@/app/components/Modal";
+import { Auth } from "@/components/Auth";
+import { Table } from "@/components/Table";
+import { Modal } from "@/components/Modal";
 import { SATELITE_ID } from "@/config/env";
 
 export default function Home() {
