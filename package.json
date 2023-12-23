@@ -1,5 +1,5 @@
 {
-  "name": "diary",
+  "name": "dare.to",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,19 +7,20 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "npx prettier --write .",
     "prepare": "husky install"
   },
   "dependencies": {
-    "@junobuild/core-peer": "^0.0.1",
+    "@junobuild/core-peer": "^0.0.5",
     "@nextui-org/react": "^2.2.9",
+    "connectkit": "^1.5.3",
     "framer-motion": "^10.16.16",
     "nanoid": "^5.0.3",
     "next": "14.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sharp": "^0.33.1",
-    "usehooks-ts": "^2.9.1"
+    "usehooks-ts": "^2.9.1",
+    "wagmi": "^1.4.12"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
@@ -32,7 +33,6 @@
     "eslint-config-next": "^14.0.4",
     "husky": "^8.0.3",
     "postcss": "^8.4.31",
-    "prettier": "^3.0.3",
     "tailwindcss": "^3.3.5",
     "typescript": "^5.3.3"
   },
