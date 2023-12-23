@@ -8,7 +8,7 @@ export const Modal = () => {
   const [inputText, setInputText] = useState("");
   const [valid, setValid] = useState(false);
   const [progress, setProgress] = useState(false);
-  const [file, setFile] = useState();
+  const [file, setFile] = useState < File | undefined>();
 
   const { user } = useContext(AuthContext);
 
@@ -23,7 +23,7 @@ export const Modal = () => {
 
   const add = async () => {
     // Demo purpose therefore edge case not properly handled
-    if ([null, undefined].includes(user)) {
+    if (!user) {
       return;
     }
 
@@ -33,7 +33,7 @@ export const Modal = () => {
       let url;
 
       if (file !== undefined) {
-        const filename = `${user.key}-${file.name}`;
+        const filename = `${user?.key || 'unknown'}-${ +new Date()}`;
 
         const { downloadUrl } = await uploadFile({
           collection: "images",
@@ -104,7 +104,7 @@ export const Modal = () => {
         focus:text-gray-700 focus:bg-white focus:border-indigo-600 focus:outline-none
         resize-none
       "
-                    rows="5"
+                    rows={5}
                     placeholder="Your diary entry"
                     onChange={(e) => {
                       setInputText(e.target.value);
@@ -115,7 +115,7 @@ export const Modal = () => {
                   <input
                     type="file"
                     className="my-4 text-slate-500 text-lg leading-relaxed"
-                    onChange={(event) => setFile(event.target.files?.[0])}
+                    onChange={(event) => setFile(event.target.files?.[0] || undefined)}
                     disabled={progress}
                   />
                 </div>

@@ -1,10 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import { listDocs } from "@junobuild/core-peer";
+import { Doc, listDocs } from "@junobuild/core-peer";
 import { AuthContext } from "./Auth";
+
+interface ITask {
+  text: string
+  url: string
+}
 
 export const Table = () => {
   const { user } = useContext(AuthContext);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<Doc<ITask>[]>([]);
 
   useEffect(() => {
     window.addEventListener("reload", list);
@@ -15,7 +20,7 @@ export const Table = () => {
   }, []);
 
   const list = async () => {
-    const { items } = await listDocs({
+    const { items } = await listDocs<ITask>({
       collection: "tasks",
       filter: {},
     });
@@ -24,7 +29,7 @@ export const Table = () => {
   };
 
   useEffect(() => {
-    if ([undefined, null].includes(user)) {
+    if (!user) {
       setItems([]);
       return;
     }
