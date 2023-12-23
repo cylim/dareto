@@ -1,21 +1,20 @@
 import { useEffect, useState } from 'react'
+import { publicClient } from '@/config/viem'
+import { formatEther } from 'viem'
 
 export const StatCard = ({ item, color }: { item: any, color: string }) => {
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState(BigInt(0))
 
   useEffect(() => {
+    if (!publicClient) { return }
     (async () => {
-      // const amounts = await item.accounts.map(
-      //   async (acc: string) => await balance({
-      //     accountIdentifier: acc,
-      //     index: {
-      //       identity: new AnonymousIdentity()
-      //     }
-      //   }))
-      //   console.log(amounts)
+      const amounts = await Promise.all(
+        item.accounts.map((addr: `0x${string}`) => publicClient.getBalance({address: addr}))
+      )
+      setAmount(amounts.reduce((prev, cur) => prev + cur, BigInt(0)))
     })();
 
-  }, [amount])
+  }, [publicClient])
 
   const renderOverview = () => {
     return <section className={`absolute transition-opacity duration-1000 overflow-hidden text w-full h-full`}>
@@ -23,7 +22,7 @@ export const StatCard = ({ item, color }: { item: any, color: string }) => {
         <div className={'flex flex-row justify-between items-center'}>
           <span className="text-base font-bold tracking-wide uppercase">{item.title}</span>
         </div>
-        <span className={'font-medium text-5xl tracking-tight leading-normal text-center'}>{amount} <span className={'font-medium text-xl tracking-tight leading-normal text-center'}>ICP</span></span>
+        <span className={'font-medium text-5xl tracking-tight leading-normal text-center'}>{formatEther(amount)} <span className={'font-medium text-xl tracking-tight leading-normal text-center'}>ETH</span></span>
       </div>
     </section>
   }
