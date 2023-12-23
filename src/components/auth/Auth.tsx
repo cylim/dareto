@@ -7,9 +7,9 @@ export const Auth = ({ children }: {children: React.ReactElement[] | React.React
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const sub = authSubscribe((user) => setUser(user));
+    const unsub = authSubscribe((user) => setUser(user));
 
-    return () => sub();
+    return () => unsub();
   }, []);
 
   useEffect(() => {

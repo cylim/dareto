@@ -122,3 +122,12 @@ label.terms-conditions {
   box-shadow: 1px 1px 20px rgba(0,0,0,0.19);
   color: #111;
 }
+
+.background {
+  transition: background-image 0.5s ease-in-out;
+  padding: 0 25px 25px;
+  background-size: cover;
+  min-height: 100vh;
+  /* background-attachment: fixed; */
+  max-height: 897px;
+}

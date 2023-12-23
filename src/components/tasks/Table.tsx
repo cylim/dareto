@@ -25,7 +25,8 @@ export const Table = () => {
         order: {
           desc: true,
           field: 'created_at'
-        }
+        },
+        owner: user?.key
       },
     });
 
@@ -42,14 +43,15 @@ export const Table = () => {
   }, [user]);
 
   return (
-    <Box className="w-full max-w-2xl mx-auto shadow-lg  mt-8">
+    <Box className="w-full max-w-2xl mx-auto shadow-lg mt-8">
       <header className="px-5 py-4 border-b border-gray-100">
-        <h2 className="font-semibold text-gray-800 text-4xl">Challenges</h2>
+        <h2 className="font-semibold text-gray-800 text-4xl">Dare.to XYZ</h2>
       </header>
       <div className="p-3">
         <div className="overflow-x-auto">
-          {!items.length ? <div>
-
+          {!items.length ? <div className="py-8">
+            <h1 className="text-9xl py-4">🧗‍♂️</h1>
+            <span className="text-xl text-stone-900">Create a challenge, step out of comfort zone!</span>
           </div> : null}
           {items.map(({ key, data: { title, proofUrl } }, index) => (
             <div key={key} className="flex items-center gap-6 px-2.5 py-1.5">
@@ -86,7 +88,7 @@ export const Table = () => {
           ))}
         </div>
       </div>
-      {!user ? <Login /> : <ChallengeCreateModal />}
+      {!user ? <div className="flex flex-col items-center"><Login /></div> : <ChallengeCreateModal />}
       
     </Box>
   );
