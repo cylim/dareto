@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss'
 import { nextui } from '@nextui-org/react'
+const plugin = require('tailwindcss/plugin')
 
 
 const config: Config = {
@@ -24,8 +25,30 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      keyframes: {
+        'text': {
+          '0%, 100%': {
+            'background-size': '500% 500%',
+            'background-position': 'top center'
+          },
+          '50%': {
+            'background-size': '500% 500%',
+            'background-position': 'bottom center'
+          }
+        },
+      }
     },
   },
-  plugins: [nextui()],
+  darkMode: "class",
+  plugins: [nextui(), plugin(function ({ matchUtilities, theme }) {
+    matchUtilities(
+      {
+        'text-shadow': (value) => ({
+          textShadow: value,
+        }),
+      },
+      { values: theme('textShadow') }
+    )
+  })],
 }
 export default config

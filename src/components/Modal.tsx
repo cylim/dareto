@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { setDoc, uploadFile } from "@junobuild/core-peer";
-import { AuthContext } from "./Auth";
+import { AuthContext } from "./auth/Auth";
 import { nanoid } from "nanoid";
 
 export const Modal = () => {
@@ -66,6 +66,7 @@ export const Modal = () => {
 
     setProgress(false);
   };
+
   if (!user) {
     return null
   }

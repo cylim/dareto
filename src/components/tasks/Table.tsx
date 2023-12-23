@@ -1,7 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { Doc, listDocs } from "@junobuild/core-peer";
-import { AuthContext } from "./Auth";
+import { AuthContext } from "@/components/auth/Auth";
 import { ITask } from "@/config/constants";
+import ChallengeCreateModal from "@/components/modals/ChallengeCreateModal";
+import Box from "../layouts/Box";
+import { Login } from "../auth/Login";
 
 export const Table = () => {
   const { user } = useContext(AuthContext);
@@ -38,17 +41,16 @@ export const Table = () => {
     (async () => await list())();
   }, [user]);
 
-  if(!user) {
-    return null
-  }
-
   return (
-    <div className="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200 mt-8">
+    <Box className="w-full max-w-2xl mx-auto shadow-lg  mt-8">
       <header className="px-5 py-4 border-b border-gray-100">
-        <h2 className="font-semibold text-gray-800">Challenges</h2>
+        <h2 className="font-semibold text-gray-800 text-4xl">Challenges</h2>
       </header>
       <div className="p-3">
         <div className="overflow-x-auto">
+          {!items.length ? <div>
+
+          </div> : null}
           {items.map(({ key, data: { title, proofUrl } }, index) => (
             <div key={key} className="flex items-center gap-6 px-2.5 py-1.5">
               <span className="px-4 py-2 rounded-full text-gray-500 bg-gray-200 font-semibold text-sm flex align-center w-max">
@@ -84,6 +86,8 @@ export const Table = () => {
           ))}
         </div>
       </div>
-    </div>
+      {!user ? <Login /> : <ChallengeCreateModal />}
+      
+    </Box>
   );
 };

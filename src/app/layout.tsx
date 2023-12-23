@@ -2,8 +2,6 @@ import { Viewport } from "next";
 import "./globals.css";
 import { Roboto } from "next/font/google";
 import React from 'react'
-import Footer from "@/components/layouts/Footer";
-import Header from "@/components/layouts/Header";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ['100', '300', '400', '500', '700', '900'] });
 
@@ -24,10 +22,8 @@ export default async function Root({
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <Header />
         {children}
-        <Footer/>
-        </body>
+      </body>
     </html>
   )
 }

@@ -6,7 +6,7 @@ export interface ITask  {
   proofUrl: string
   userId: string
   keyId: string
-  completionTimestamp: string
-  deadlineTimestamp: string
+  completionTimestamp: number
+  deadlineTimestamp: number
 } 
 

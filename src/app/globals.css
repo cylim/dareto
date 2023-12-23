@@ -22,5 +22,103 @@ html {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-end-rgb))
+  /* background: rgb(var(--background-end-rgb)); */
+  padding-bottom: env(safe-area-inset-bottom);
+  background-color: #000;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "helvetica neue", "arial", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes gradient {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+p.terms-conditions {
+  font-size: 12px;
+  line-height: 15px;
+  color: white;
+}
+
+span.terms-conditions {
+  font-size: 15px;
+  line-height: 15px;
+  color: white;
+}
+
+label.terms-conditions {
+  font-size: 12px;
+  line-height: 15px;
+  color: white;
+}
+
+.primary-button {
+  background: linear-gradient(270deg, #ff0099, #493240, #2b5876, #4e4376);
+  background-size: 800% 800%;
+  animation: gradient 15s ease infinite;
+  color: white;
+  border: none;
+  border-radius: 50px!important;
+  padding: 30px 35px;
+  font-size: 1.1em!important;
+  font-weight: 500!important;
+  letter-spacing: -0.02rem;
+  transition: all 0.3s ease;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+}
+
+.primary-button:hover {
+  cursor: pointer;
+  transform: translateY(-3px);
+  box-shadow: 1px 1px 20px rgba(0,0,0,0.19);
+}
+
+.primary-button[disabled] {
+  opacity: 0.5;
+}
+
+.primary-button.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.card-blue {
+  background-color: #184EE4;
+  border:#184EE4 solid 1px;
+}
+.card-red {
+  background-color: #FF0040;
+  border:#FF0040 solid 1px;
+}
+
+.box-wrapper {
+  border-radius: 20px;
+  padding: 35px 40px;
+  margin: 0 0 40px;
+  background: rgba(255, 255, 255, 0.8);  /* Change color and transparency as needed */
+  backdrop-filter: blur(15px);
+  box-shadow: 1px 1px 20px rgba(0,0,0,0.19);
+  color: #111;
 }

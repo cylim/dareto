@@ -2,10 +2,13 @@
 
 import { useEffect } from "react";
 import { initJuno } from "@junobuild/core-peer";
-import { Auth } from "@/components/Auth";
-import { Table } from "@/components/Table";
-import { Modal } from "@/components/Modal";
+import { Auth } from "@/components/auth/Auth";
+import { Table } from "@/components/tasks/Table";
 import { SATELITE_ID } from "@/config/env";
+import redpandaImg from '@/assets/images/redpanda.jpg';
+import Header from "@/components/layouts/Header";
+import Footer from "@/components/layouts/Footer";
+import { GeneralStats } from "@/components/stats/GeneralStats";
 
 export default function Home() {
   useEffect(() => {
@@ -17,32 +20,19 @@ export default function Home() {
 
   return (
     <Auth>
-      <div className="isolate bg-white min-h-screen">
+      <div className="min-h-screen background overflow-y-auto bg-cover bg-[#00000050] bg-blend-hue overflow-x-hidden" style={{ backgroundImage: `url(${redpandaImg.src})` }}>
+        <Header/>
         <main>
           <div className="relative px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl pt-16">
+            <div className="mx-auto max-w-2xl pt-10">
               <div className="text-center">
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                  Sample Juno App
-                </h1>
-                <p className="mt-6 text-lg leading-8 text-gray-600">
-                  A sample app build with React, Tailwind and{" "}
-                  <a
-                    href="https://juno.build"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    className="underline"
-                  >
-                    Juno
-                  </a>
-                  .
-                </p>
                 <Table />
-                <Modal />
+                <GeneralStats />
               </div>
             </div>
           </div>
         </main>
+        <Footer/>
       </div>
     </Auth>
   );
