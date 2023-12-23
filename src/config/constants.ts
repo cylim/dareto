@@ -1,9 +1,9 @@
 type StatusType = 'completed' | 'pending' | 'failed' | 'abandoned'
 
-interface ITask  {
+export interface ITask  {
   title: string
   status: StatusType
-  proof: string
+  proofUrl: string
   userId: string
   keyId: string
   completionTimestamp: string

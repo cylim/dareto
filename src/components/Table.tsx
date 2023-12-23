@@ -1,11 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Doc, listDocs } from "@junobuild/core-peer";
 import { AuthContext } from "./Auth";
-
-interface ITask {
-  text: string
-  url: string
-}
+import { ITask } from "@/config/constants";
 
 export const Table = () => {
   const { user } = useContext(AuthContext);
@@ -22,7 +18,12 @@ export const Table = () => {
   const list = async () => {
     const { items } = await listDocs<ITask>({
       collection: "tasks",
-      filter: {},
+      filter: {
+        order: {
+          desc: true,
+          field: 'created_at'
+        }
+      },
     });
 
     setItems(items);
@@ -37,25 +38,29 @@ export const Table = () => {
     (async () => await list())();
   }, [user]);
 
+  if(!user) {
+    return null
+  }
+
   return (
     <div className="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200 mt-8">
       <header className="px-5 py-4 border-b border-gray-100">
-        <h2 className="font-semibold text-gray-800">Entries</h2>
+        <h2 className="font-semibold text-gray-800">Challenges</h2>
       </header>
       <div className="p-3">
         <div className="overflow-x-auto">
-          {items.map(({ key, data: { text, url } }, index) => (
+          {items.map(({ key, data: { title, proofUrl } }, index) => (
             <div key={key} className="flex items-center gap-6 px-2.5 py-1.5">
               <span className="px-4 py-2 rounded-full text-gray-500 bg-gray-200 font-semibold text-sm flex align-center w-max">
                 {index + 1}
               </span>
-              <div className="line-clamp-3 text-left grow">{text}</div>
+              <div className="line-clamp-3 text-left grow">{title}</div>
               <div>
-                {url !== undefined ? (
+                {proofUrl !== undefined ? (
                   <a
                     aria-label="Open data"
                     rel="noopener noreferrer"
-                    href={url}
+                    href={proofUrl}
                     target="_blank"
                   >
                     <svg

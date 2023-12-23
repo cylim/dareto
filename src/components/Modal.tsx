@@ -66,6 +66,9 @@ export const Modal = () => {
 
     setProgress(false);
   };
+  if (!user) {
+    return null
+  }
 
   return (
     <>

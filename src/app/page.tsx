@@ -16,8 +16,8 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-      <div className="isolate bg-white">
+    <Auth>
+      <div className="isolate bg-white min-h-screen">
         <main>
           <div className="relative px-6 lg:px-8">
             <div className="mx-auto max-w-2xl pt-16">
@@ -37,17 +37,13 @@ export default function Home() {
                   </a>
                   .
                 </p>
-
-                <Auth>
-                  <Table />
-
-                  <Modal />
-                </Auth>
+                <Table />
+                <Modal />
               </div>
             </div>
           </div>
         </main>
       </div>
-    </>
+    </Auth>
   );
 }
