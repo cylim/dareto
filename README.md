@@ -1,11 +1,15 @@
-# dareto
+<img src='docs/red-panda.png' width='100'>
+
+# dare.to
 codename: Red Panda ()
 
 `self challenging and make a different!`
 
 ## Getting started
 
-Make sure you have [node.js](https://nodejs.org) LTS installed.
+Make sure you have [node.js](https://nodejs.org) LTS installed. This project is for the [ICP Hackathon](https://github.com/ICPHackathon/ICP-Hackathon-2023/issues/7). Basic usage as follow,
+
+![flowchart](docs/flow.png)
 
 ```bash
 npm ci
@@ -16,8 +20,6 @@ npm ci
 ```bash
 npm run dev
 ```
-
-
 
 ### Client side only
 
@@ -42,7 +44,6 @@ module.exports = nextConfig;
 npm run build && juno deploy
 ```
 After `npm run build`, the bundle output directory called `out` can be used as the source of the content to upload to a Juno's satellite.
-
 
 
 ## Resources
