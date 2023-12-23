@@ -12,9 +12,20 @@ import { toHex } from 'viem'
 
 const chain = sepolia;
 
-export const AuthContext = createContext<{ user: User | null, provider: AlchemyProvider | null }>({ user: null, provider: null});
+interface IAuthContext { 
+  user: User | null, 
+  provider: AlchemyProvider | null 
+  address: `0x${string}` | null
+}
+
+export const AuthContext = createContext<IAuthContext>({ 
+  user: null, 
+  provider: null,
+  address: null,
+});
 
 export const Auth = ({ children }: {children: React.ReactElement[] | React.ReactElement }) => {
+  const [address, setAddress] = useState<`0x${string}` | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [provider, setProvider] = useState<AlchemyProvider | null>(null)
   useEffect(() => {
@@ -26,10 +37,9 @@ export const Auth = ({ children }: {children: React.ReactElement[] | React.React
   useEffect(() => {
     if(!user) { 
       setProvider(null)
+      setAddress(null)
       return 
     }
-    console.log(user)
-
     const PRIVATE_KEY = toHex((user?.key || '0x').slice(0,30), {size: 32}) as Hex;
     const owner = LocalAccountSigner.privateKeyToAccountSigner(PRIVATE_KEY);
 
@@ -44,16 +54,19 @@ export const Auth = ({ children }: {children: React.ReactElement[] | React.React
           chain,
           factoryAddress: getDefaultLightAccountFactoryAddress(chain),
         })
-    );
+    )
+    setProvider(provider);
 
     (async () => {
-      console.log("Smart Account Address: ", await provider.getAddress());
+      const addr = await provider.getAddress()
+      console.log("Smart Account Address: ", addr);
+      setAddress(addr)
     })();
 
   }, [user])
 
   return (
-    <AuthContext.Provider value={{ user, provider }}>
+    <AuthContext.Provider value={{ user, provider, address }}>
       {children}
     </AuthContext.Provider>
   );
