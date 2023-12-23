@@ -91,8 +91,7 @@ export const ChallengeCreateModal = () => {
       <ModalHeader className="flex flex-col" >
         <h3 className="text-center text-white/50 font-bold">Dare to Challenge!</h3>
         <span className={'w-full text-3xl font-bold text-center bg-gradient-to-t from-slate-700 via-zinc-500 to-slate-400 text-transparent bg-clip-text animate-text'}>
-          The exit process takes 24+ hours to transition into a withdrawable state,
-          followed by a few days of cooling period before funds are transferred back to you.
+          
         </span>
       </ModalHeader>
       <ModalBody>
