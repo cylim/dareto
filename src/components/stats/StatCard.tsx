@@ -6,14 +6,25 @@ export const StatCard = ({ item, color }: { item: any, color: string }) => {
   const [amount, setAmount] = useState(BigInt(0))
 
   useEffect(() => {
+    window.addEventListener("reloadFund", update);
+
+    return () => {
+      window.removeEventListener("reloadFund", update);
+    };
+  }, []);
+
+  const update = async () => {
     if (!publicClient) { return }
     (async () => {
       const amounts = await Promise.all(
-        item.accounts.map((addr: `0x${string}`) => publicClient.getBalance({address: addr}))
+        item.accounts.map((addr: `0x${string}`) => publicClient.getBalance({ address: addr }))
       )
       setAmount(amounts.reduce((prev, cur) => prev + cur, BigInt(0)))
     })();
+  }
 
+  useEffect(() => {
+    update()
   }, [publicClient])
 
   return <div

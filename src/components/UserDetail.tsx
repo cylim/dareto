@@ -12,22 +12,32 @@ const BalanceCard = ({ token, address, contract }: { token: string, address: `0x
   const [amount, setAmount] = useState(BigInt(0))
 
   useEffect(() => {
+    window.addEventListener("reload", update);
+
+    return () => {
+      window.removeEventListener("reload", update);
+    };
+  }, []);
+
+  const update = async () => {
     if (!publicClient) { return }
 
-    (async () => {
-      let bal = BigInt(0)
-      if (!!contract) {
-        const data = await publicClient.readContract({
-          ...contract,
-          functionName: 'balanceOf',
-          args: [address]
-        })
-        bal = data 
-      } else {
-        bal = await publicClient.getBalance({ address })
-      }
-      setAmount(bal)
-    })();
+    let bal = BigInt(0)
+    if (!!contract) {
+      const data = await publicClient.readContract({
+        ...contract,
+        functionName: 'balanceOf',
+        args: [address]
+      })
+      bal = data
+    } else {
+      bal = await publicClient.getBalance({ address })
+    }
+    setAmount(bal)
+  }
+
+  useEffect(() => {
+    update()
 
   }, [publicClient, address, contract])
 

@@ -8,6 +8,7 @@ import { Input } from "@nextui-org/react";
 import { charities } from "@/config/charities";
 import { parseEther, encodeFunctionData } from 'viem';
 import Contracts from "@/contracts";
+import toast from "react-hot-toast";
 
 export const ChallengeCreateModal = () => {
   const [showModal, setShowModal] = useState(false)
@@ -46,6 +47,7 @@ export const ChallengeCreateModal = () => {
       const key = `${user.key}-${+new Date()}`;
       const [dAddr] = donationAddress
 
+      toast('Creating challenge task...')
       await setDoc<ITask>({
         collection: "tasks",
         doc: {
@@ -65,6 +67,7 @@ export const ChallengeCreateModal = () => {
         },
       });
 
+      toast('pledging token for completion...')
       const callData = encodeFunctionData({
         abi: Contracts.sepolia.challenge.abi,
         functionName: "create",
@@ -79,10 +82,13 @@ export const ChallengeCreateModal = () => {
 
       const txHash = await provider.waitForUserOperationTransaction(hash);
       console.log(txHash)
+      toast(`Created: ${txHash}`)
 
       setShowModal(false);
 
       reload();
+      let event = new Event("reloadFund");
+      window.dispatchEvent(event);
     } catch (err) {
       console.error(err);
     }
