@@ -89,14 +89,10 @@ export const ChallengeCreateModal = () => {
     </div>
     <ModalBase isOpen={showModal} onOpenChange={setShowModal}>
       <ModalHeader className="flex flex-col" >
-        <h3 className="text-center text-white/50 font-bold">Dare to Challenge!</h3>
-        <span className={'w-full text-3xl font-bold text-center bg-gradient-to-t from-slate-700 via-zinc-500 to-slate-400 text-transparent bg-clip-text animate-text'}>
-          
-        </span>
+        <h3 className="text-center text-xl text-white/50 font-bold">Dare.to Challenge!</h3>
       </ModalHeader>
       <ModalBody>
         <div className="py-16">
-          <h3 className="text-center text-white/50 font-bold">Dare to Challenge!</h3>
           {/* <h1 className="text-white font-bold text-center text-6xl py-2 ">#{validatorIndex}</h1>
           <h3 className="text-center text-white/50 font-bold"><Tooltip placement="bottom" color="default" content={`${pubkey}`}><Link isExternal href={`${chain?.blockExplorers?.beaconchain?.url}/validator/${pubkey}`} target="_blank" rel="noopener">{truncate(pubkey, 10)}</Link></Tooltip></h3> */}
         </div>

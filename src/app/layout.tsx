@@ -6,7 +6,7 @@ import React from 'react'
 const roboto = Roboto({ subsets: ["latin"], weight: ['100', '300', '400', '500', '700', '900'] });
 
 export const metadata = {
-  title: "Dareto",
+  title: "Dare.to XYZ",
   description: "self challenging and make a different! Powered by ICP.",
   other: {
       'msapplication-TileColor': '#000',

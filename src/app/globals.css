@@ -105,15 +105,15 @@ label.terms-conditions {
 }
 
 .card-blue {
-  background-color: #184EE4;
-  border:#184EE4 solid 1px;
+  background-color: #184EE495;
+  /* border:#184EE4 solid 1px; */
 }
 .card-red {
-  background-color: #FF0040;
-  border:#FF0040 solid 1px;
+  background-color: #FF004095;
+  /* border:#FF0040 solid 1px; */
 }
 .card-black {
-    background: rgba(0, 0, 0, 0.6) !important;  /* Change color and transparency as needed */
+  background: rgba(0, 0, 0, 0.6) !important; 
   border:rgba(255, 255, 255, 0.8) solid 1px;
   color: #fff !important;
 }
@@ -122,7 +122,7 @@ label.terms-conditions {
   border-radius: 20px;
   padding: 35px 40px;
   margin: 0 0 40px;
-  background: rgba(255, 255, 255, 0.8);  /* Change color and transparency as needed */
+  background: rgba(255, 255, 255, 0.5); 
   backdrop-filter: blur(15px);
   box-shadow: 1px 1px 20px rgba(0,0,0,0.19);
   color: #111;
@@ -133,6 +133,5 @@ label.terms-conditions {
   padding: 0 25px 25px;
   background-size: cover;
   min-height: 100vh;
-  /* background-attachment: fixed; */
   max-height: 897px;
 }

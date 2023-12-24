@@ -1,7 +1,7 @@
 <img src='docs/red-panda.png' width='100'>
 
 # dare.to
-codename: Red Panda ()
+codename: Red Panda (Ailurus fulgens)
 
 `self challenging and make a different!`
 
@@ -48,4 +48,12 @@ After `npm run build`, the bundle output directory called `out` can be used as t
 
 ## Resources
 1. [setup wallet](https://internetcomputer.org/docs/current/developer-docs/setup/cycles/cycles-wallet)
-2. [Alze](https://demergent-labs.github.io/azle/deployment.html)
+1. [Alze](https://demergent-labs.github.io/azle/deployment.html)
+1. [ICP Hackathon](https://github.com/ICPHackathon/ICP-Hackathon-2023/issues/7)
+1. [Blockchain Academy](https://www.talentre.academy/learn/detail?id=3)
+
+### Credits
+1. [Flaticon](Flaticon.com) - Red Panda Logo
+1. [RawPixel](rawpixel.com) - Red Panda Background
+1. [Juno](juno.build) - ICP Hosting, storage, datastore, authentication
+1. [The Giving Block](https://thegivingblock.com/) - Ideas about chairty donation with cryptos
