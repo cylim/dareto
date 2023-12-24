@@ -6,8 +6,10 @@ import ChallengeCreateModal from "@/components/modals/ChallengeCreateModal";
 import Box from "../layouts/Box";
 import { Login } from "../auth/Login";
 import { TableItem } from "./TableItem";
+import { useReadLocalStorage } from "usehooks-ts";
 
 export const Table = () => {
+  const userId = useReadLocalStorage<string>('id:userid')
   const { user } = useContext(AuthContext);
   const [items, setItems] = useState<Doc<ITask>[]>([]);
 
@@ -20,6 +22,8 @@ export const Table = () => {
   }, []);
 
   const list = async () => {
+    if(!user?.key && !userId) return
+
     const { items } = await listDocs<ITask>({
       collection: "tasks",
       filter: {
@@ -27,7 +31,7 @@ export const Table = () => {
           desc: true,
           field: 'created_at'
         },
-        owner: user?.key || 'hjucn-tqcmv-so34n-uhk5k-aytjd-rn2cu-fqyar-byulg-ta2x7-7bdk6-qqe'
+        owner: user?.key || userId || 'hjucn-tqcmv-so34n-uhk5k-aytjd-rn2cu-fqyar-byulg-ta2x7-7bdk6-qqe'
       },
     });
 

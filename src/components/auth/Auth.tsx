@@ -9,6 +9,7 @@ import { LocalAccountSigner, type Hex } from "@alchemy/aa-core";
 import { sepolia } from "viem/chains";
 import { ALCHEMY_AA_GAS_POLICY_ID, ALCHEMY_API_KEY } from "@/config/env";
 import { toHex } from 'viem'
+import { useLocalStorage } from "usehooks-ts";
 
 const chain = sepolia;
 
@@ -25,6 +26,7 @@ export const AuthContext = createContext<IAuthContext>({
 });
 
 export const Auth = ({ children }: {children: React.ReactElement[] | React.ReactElement }) => {
+  const [userId, setUserId] = useLocalStorage('id:userid', "")
   const [address, setAddress] = useState<`0x${string}` | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [provider, setProvider] = useState<AlchemyProvider | null>(null)
@@ -35,12 +37,14 @@ export const Auth = ({ children }: {children: React.ReactElement[] | React.React
   }, []);
 
   useEffect(() => {
-    if(!user) { 
+    if(!user?.key) { 
+      setUser(null)
       setProvider(null)
       setAddress(null)
       return 
     }
-    const PRIVATE_KEY = toHex((user?.key || '0x').slice(0,30), {size: 32}) as Hex;
+    setUserId(user.key)
+    const PRIVATE_KEY = toHex((user.key).slice(0,30), {size: 32}) as Hex;
     const owner = LocalAccountSigner.privateKeyToAccountSigner(PRIVATE_KEY);
 
     const provider = new AlchemyProvider({

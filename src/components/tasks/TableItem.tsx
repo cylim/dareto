@@ -51,10 +51,13 @@ export const TableItem = ({ item, createdAt, updatedAt }: { item: ITask, created
         const { hash } = await provider.sendUserOperation({
           target: Contracts.sepolia.challenge.address,
           data: callData,
-        });
+        }
+        // {paymasterAndData: "0x"}
+        );
+        console.log('hash', hash)
 
         const txHash = await provider.waitForUserOperationTransaction(hash);
-        console.log(txHash)
+        console.log('txHash', txHash)
 
         await setDoc<ITask>({
           collection: "tasks",
@@ -74,6 +77,8 @@ export const TableItem = ({ item, createdAt, updatedAt }: { item: ITask, created
         toast(`Done: ${txHash}`)
 
         reload()
+        let event = new Event("reloadUser");
+        window.dispatchEvent(event);
       }
     } catch (err) {
       console.error(err);
@@ -123,6 +128,8 @@ export const TableItem = ({ item, createdAt, updatedAt }: { item: ITask, created
       reload()
       let event = new Event("reloadFund");
       window.dispatchEvent(event);
+      let event2 = new Event("reloadUser");
+      window.dispatchEvent(event2);
     } catch (err) {
       console.error(err);
     }
@@ -161,11 +168,14 @@ export const TableItem = ({ item, createdAt, updatedAt }: { item: ITask, created
     {item.status === 'pending' ? (
       <div className={'flex flex-row flex-wrap justify-center gap-2'}>
         <Input
+          key={`${item.keyId}-input`}
+          id={`${item.keyId}-input`}
+          name={`${item.keyId}-input`}
           type="file"
           className="mx-4"
-          onChange={(event) => setFile(event.target.files?.[0] || undefined)}
+          onChange={(e) => setFile(e.target.files?.[0] || undefined)}
           disabled={loading}
-          accept="image/*,.pdf"
+          accept="image/*"
         />
         <Button radius="full" onClick={handleSubmitProof} isLoading={loading} color={'primary'} className="w-[280px]">Submit Proof</Button>
         <Button radius="full" onClick={handleSurrender} isLoading={loading} color={'danger'} className="w-[280px]">Abandon</Button>

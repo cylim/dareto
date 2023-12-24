@@ -12,10 +12,10 @@ const BalanceCard = ({ token, address, contract }: { token: string, address: `0x
   const [amount, setAmount] = useState(BigInt(0))
 
   useEffect(() => {
-    window.addEventListener("reload", update);
+    window.addEventListener("reloadUser", update);
 
     return () => {
-      window.removeEventListener("reload", update);
+      window.removeEventListener("reloadUser", update);
     };
   }, []);
 
@@ -38,7 +38,6 @@ const BalanceCard = ({ token, address, contract }: { token: string, address: `0x
 
   useEffect(() => {
     update()
-
   }, [publicClient, address, contract])
 
   return <div
