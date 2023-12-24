@@ -5,6 +5,32 @@ const json = [
 		"type": "constructor"
 	},
 	{
+		"inputs": [],
+		"name": "NotChallengePending",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "NotChallengerOwner",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "NotEnoughMemeToken",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "NotEnoughNativeToken",
+		"type": "error"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -85,14 +111,8 @@ const json = [
 			}
 		],
 		"name": "complete",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "done",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "payable",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -103,14 +123,9 @@ const json = [
 				"type": "string"
 			},
 			{
-				"internalType": "address",
+				"internalType": "address payable",
 				"name": "to",
 				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
@@ -119,13 +134,7 @@ const json = [
 			}
 		],
 		"name": "create",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "success",
-				"type": "bool"
-			}
-		],
+		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
 	},
@@ -138,14 +147,8 @@ const json = [
 			}
 		],
 		"name": "forfeit",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "done",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "payable",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -214,6 +217,52 @@ const json = [
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "setFailureToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address payable",
+				"name": "_addr",
+				"type": "address"
+			}
+		],
+		"name": "setMemeAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "setMemeAllowance",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "setSuccessToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "newOwner",
 				"type": "address"
@@ -240,12 +289,12 @@ const json = [
 				"type": "uint256"
 			},
 			{
-				"internalType": "address",
+				"internalType": "address payable",
 				"name": "owner",
 				"type": "address"
 			},
 			{
-				"internalType": "address",
+				"internalType": "address payable",
 				"name": "donationAddress",
 				"type": "address"
 			},
@@ -257,6 +306,19 @@ const json = [
 			{
 				"internalType": "uint256",
 				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "FAILURE_TOKEN_AMOUNT",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
 				"type": "uint256"
 			}
 		],
@@ -281,12 +343,12 @@ const json = [
 						"type": "uint256"
 					},
 					{
-						"internalType": "address",
+						"internalType": "address payable",
 						"name": "owner",
 						"type": "address"
 					},
 					{
-						"internalType": "address",
+						"internalType": "address payable",
 						"name": "donationAddress",
 						"type": "address"
 					},
@@ -311,12 +373,38 @@ const json = [
 	},
 	{
 		"inputs": [],
+		"name": "MEME_ADDRESS",
+		"outputs": [
+			{
+				"internalType": "address payable",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "owner",
 		"outputs": [
 			{
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "SUCCESS_TOKEN_AMOUNT",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",

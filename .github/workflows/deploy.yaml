@@ -27,3 +27,5 @@ jobs:
           args: deploy
         env:
           JUNO_TOKEN: ${{ secrets.JUNO_TOKEN }}
+          NEXT_PUBLIC_JUNO_SATELITE: ${{ secrets.NEXT_PUBLIC_JUNO_SATELITE }}
+          NEXT_PUBLIC_ALCHEMY_API_KEY: ${{ secrets.NEXT_PUBLIC_ALCHEMY_API_KEY }}

@@ -11,7 +11,7 @@ export const Contracts: { [key in string]: any } = {
       chainId: sepolia.id,
     },
     challenge: {
-      address: '0x685bCC921514b9809e06BB051e627c4EBe063e0b',
+      address: '0x0d36FfaA0711B805498675CDbF40607b48c85653',
       abi: challengeABI,
       chainId: sepolia.id,
     },
@@ -19,3 +19,6 @@ export const Contracts: { [key in string]: any } = {
 }
 
 export default Contracts
+
+
+// "a","0xAbB840EF2f94925e957B6680541793565d63f228",1704379627
