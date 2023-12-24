@@ -5,6 +5,7 @@ import { ITask } from "@/config/constants";
 import ChallengeCreateModal from "@/components/modals/ChallengeCreateModal";
 import Box from "../layouts/Box";
 import { Login } from "../auth/Login";
+import { TableItem } from "./TableItem";
 
 export const Table = () => {
   const { user } = useContext(AuthContext);
@@ -42,50 +43,24 @@ export const Table = () => {
     (async () => await list())();
   }, [user]);
 
+  const renderTableItem = ({ key, data, created_at, updated_at }: Doc<ITask>) => {
+    return <TableItem key={key} item={data} createdAt={created_at} updatedAt={updated_at} />
+  }
+
   return (
     <Box className="w-full max-w-2xl mx-auto shadow-lg mt-8">
       <header className="px-5 py-4 border-b border-gray-100">
         <h2 className="font-semibold text-gray-800 text-4xl">Dare.to XYZ</h2>
       </header>
-      <div className="p-3">
+      <div className="py-3">
         <div className="overflow-x-auto">
           {!items.length ? <div className="py-8">
             <h1 className="text-9xl py-4">🧗‍♂️</h1>
             <span className="text-xl text-stone-900">Create a challenge, step out of comfort zone!</span>
           </div> : null}
-          {items.map(({ key, data: { title, proofUrl } }, index) => (
-            <div key={key} className="flex items-center gap-6 px-2.5 py-1.5">
-              <span className="px-4 py-2 rounded-full text-gray-500 bg-gray-200 font-semibold text-sm flex align-center w-max">
-                {index + 1}
-              </span>
-              <div className="line-clamp-3 text-left grow">{title}</div>
-              <div>
-                {proofUrl !== undefined ? (
-                  <a
-                    aria-label="Open data"
-                    rel="noopener noreferrer"
-                    href={proofUrl}
-                    target="_blank"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                      />
-                    </svg>
-                  </a>
-                ) : undefined}
-              </div>
-            </div>
-          ))}
+          <div className="max-h-[320px] overflow-y-auto">
+            {items.map(renderTableItem)}
+          </div>
         </div>
       </div>
       {!user ? <div className="flex flex-col items-center"><Login /></div> : <ChallengeCreateModal />}

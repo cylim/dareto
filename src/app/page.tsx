@@ -27,7 +27,7 @@ export default function Home() {
         <div className="min-h-screen background overflow-y-auto bg-cover bg-center bg-[#00000090] bg-blend-hue overflow-x-hidden" style={{ backgroundImage: `url(${redpandaImg.src})` }}>
           <Header />
           <main>
-            <div className="relative px-6 lg:px-8">
+            <div className="relative px-0 md:px-4 lg:px-8">
               <div className="mx-auto max-w-2xl pt-10">
                 <div className="text-center">
                   <Table />

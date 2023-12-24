@@ -87,8 +87,6 @@ export const ChallengeCreateModal = () => {
       setShowModal(false);
 
       reload();
-      let event = new Event("reloadFund");
-      window.dispatchEvent(event);
     } catch (err) {
       console.error(err);
     }

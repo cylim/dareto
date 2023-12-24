@@ -1,4 +1,4 @@
-type StatusType = 'completed' | 'pending' | 'failed' | 'abandoned'
+export type StatusType = 'pending' | 'completed' | 'failed'
 
 export interface ITask  {
   title: string
