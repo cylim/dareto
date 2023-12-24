@@ -69,5 +69,8 @@ export const UserDetail = () => {
       <BalanceCard token={'ETH'} address={address} />
       <BalanceCard token={'FUL'} address={address} contract={Contracts.sepolia.fulToken} />
     </div>
+    <div className={'pt-4'}>
+      <p>Sepolia testnet</p>
+    </div>
   </Box>
 }

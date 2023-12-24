@@ -10,6 +10,7 @@ import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
 import { GeneralStats } from "@/components/stats/GeneralStats";
 import { UserDetail } from "@/components/UserDetail";
+import { NextUIProvider } from "@nextui-org/react";
 
 export default function Home() {
   useEffect(() => {
@@ -20,7 +21,8 @@ export default function Home() {
   }, []);
 
   return (
-    <Auth>
+    <NextUIProvider>
+      <Auth>
       <div className="min-h-screen background overflow-y-auto bg-cover bg-center bg-[#00000090] bg-blend-hue overflow-x-hidden" style={{ backgroundImage: `url(${redpandaImg.src})` }}>
         <Header/>
         <main>
@@ -37,5 +39,6 @@ export default function Home() {
         <Footer/>
       </div>
     </Auth>
+    </NextUIProvider>
   );
 }

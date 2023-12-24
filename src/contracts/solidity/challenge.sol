@@ -18,6 +18,7 @@
 //     uint256 amount;
 // }
 
+// /// @custom:security-contact cylim226@gmail.com
 // contract ChallengeContract is Ownable {
 //     mapping(string => Challenge) public challenges;
 

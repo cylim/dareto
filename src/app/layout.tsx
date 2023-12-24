@@ -42,9 +42,9 @@ export default async function Root({
 }) {
 
   return (
-    <html lang="en">
+    <html lang="en" className='dark'>
       <body className={roboto.className}>
-        {children}
+          {children}
       </body>
     </html>
   )
