@@ -27,7 +27,7 @@ export const Table = () => {
           desc: true,
           field: 'created_at'
         },
-        owner: user?.key
+        owner: user?.key || 'hjucn-tqcmv-so34n-uhk5k-aytjd-rn2cu-fqyar-byulg-ta2x7-7bdk6-qqe'
       },
     });
 
