@@ -9,6 +9,7 @@ import redpandaImg from '@/assets/images/redpanda.jpg';
 import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
 import { GeneralStats } from "@/components/stats/GeneralStats";
+import { UserDetail } from "@/components/UserDetail";
 
 export default function Home() {
   useEffect(() => {
@@ -27,6 +28,7 @@ export default function Home() {
             <div className="mx-auto max-w-2xl pt-10">
               <div className="text-center">
                 <Table />
+                <UserDetail />
                 <GeneralStats />
               </div>
             </div>

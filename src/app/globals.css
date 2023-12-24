@@ -112,6 +112,11 @@ label.terms-conditions {
   background-color: #FF0040;
   border:#FF0040 solid 1px;
 }
+.card-black {
+    background: rgba(0, 0, 0, 0.6) !important;  /* Change color and transparency as needed */
+  border:rgba(255, 255, 255, 0.8) solid 1px;
+  color: #fff !important;
+}
 
 .box-wrapper {
   border-radius: 20px;

@@ -1,9 +1,18 @@
-import { sepolia } from 'viem/chains'
+import { sepolia, mainnet } from 'viem/chains'
 
 import fulgensABI from './abis/fulgens'
 import challengeABI from './abis/challenge'
 
-export const Contracts: { [key in string]: any } = {
+type SupportedNetworks = 'sepolia'
+type SupportedContracts = 'fulToken' | 'challenge'
+
+interface IContract {
+  address: string
+  abi: any
+  chainId: number
+}
+
+export const Contracts = {
   [sepolia.network]: {
     fulToken: {
       address: '0x765D0C57b993D3eD180001b817a6bCc13Ce7044e',
@@ -16,7 +25,7 @@ export const Contracts: { [key in string]: any } = {
       chainId: sepolia.id,
     },
   }
-}
+} as const satisfies {[key in SupportedNetworks]: {[key in SupportedContracts]: IContract}}
 
 export default Contracts
 
