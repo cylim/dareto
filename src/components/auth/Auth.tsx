@@ -7,7 +7,7 @@ import {
 import { AlchemyProvider } from "@alchemy/aa-alchemy";
 import { LocalAccountSigner, type Hex } from "@alchemy/aa-core";
 import { sepolia } from "viem/chains";
-import { ALCHEMY_API_KEY } from "@/config/env";
+import { ALCHEMY_AA_GAS_POLICY_ID, ALCHEMY_API_KEY } from "@/config/env";
 import { toHex } from 'viem'
 
 const chain = sepolia;
@@ -55,6 +55,10 @@ export const Auth = ({ children }: {children: React.ReactElement[] | React.React
           factoryAddress: getDefaultLightAccountFactoryAddress(chain),
         })
     )
+    provider.withAlchemyGasManager({
+      policyId: ALCHEMY_AA_GAS_POLICY_ID,
+    });
+
     setProvider(provider);
 
     (async () => {

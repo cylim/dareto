@@ -23,6 +23,7 @@ jobs:
         env:
           NEXT_PUBLIC_JUNO_SATELITE: ${{ secrets.NEXT_PUBLIC_JUNO_SATELITE }}
           NEXT_PUBLIC_ALCHEMY_API_KEY: ${{ secrets.NEXT_PUBLIC_ALCHEMY_API_KEY }}
+          NEXT_PUBLIC_ALCHEMY_AA_GAS_POLICY_ID: ${{ secrets.NEXT_PUBLIC_ALCHEMY_AA_GAS_POLICY_ID }}
 
       - name: Deploy to Juno
         uses: junobuild/juno-action@main
