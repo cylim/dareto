@@ -71,12 +71,20 @@ frontend hosting: ivvrr-viaaa-aaaal-adhzq-cai
 internet identity: ic0.app
 ```
 
+## Demo
+This project is for the [ICP Hackathon](https://github.com/ICPHackathon/ICP-Hackathon-2023/issues/7).
+
+[site in icp0 link](https://ivvrr-viaaa-aaaal-adhzq-cai.icp0.io/)
+[site](https://dareto.monify.xyz)
+
 
 ## Resources
+1. [ICP Hackathon](https://github.com/ICPHackathon/ICP-Hackathon-2023/issues/7)
 1. [setup wallet](https://internetcomputer.org/docs/current/developer-docs/setup/cycles/cycles-wallet)
 1. [Alze](https://demergent-labs.github.io/azle/deployment.html)
-1. [ICP Hackathon](https://github.com/ICPHackathon/ICP-Hackathon-2023/issues/7)
 1. [Blockchain Academy](https://www.talentre.academy/learn/detail?id=3)
+1. [sepolia faucet - infura](https://www.infura.io/faucet/sepolia)
+1. [sepolia faucet - alchemy](https://sepoliafaucet.com/)
 
 ### Credits
 1. [Flaticon](Flaticon.com) - Red Panda Logo

@@ -6,6 +6,7 @@ import CopyIcon from '@/assets/icons/copy.svg'
 import { publicClient } from "@/config/viem";
 import { formatEther } from 'viem'
 import Contracts from "@/contracts";
+import { Link } from "@nextui-org/react";
 
 const BalanceCard = ({ token, address, contract }: { token: string, address: `0x${string}`, contract?: typeof Contracts.sepolia.fulToken }) => {
 
@@ -79,7 +80,7 @@ export const UserDetail = () => {
       <BalanceCard token={'FUL'} address={address} contract={Contracts.sepolia.fulToken} />
     </div>
     <div className={'pt-4'}>
-      <p>Sepolia testnet</p>
+      <p>Sepolia testnet <Link href={'https://www.infura.io/faucet/sepolia'} target="_blank" rel="noopener" isExternal>(faucet)</Link></p>
     </div>
   </Box>
 }
