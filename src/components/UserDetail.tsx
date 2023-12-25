@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import Box from "./layouts/Box"
-import { AuthContext } from "./auth/Auth";
+import { AuthContext, chain, selectedNetwork } from "./auth/Auth";
 import { formatAddress } from "@/utils/strings";
 import CopyIcon from '@/assets/icons/copy.svg'
 import { publicClient } from "@/config/viem";
@@ -8,7 +8,7 @@ import { formatEther } from 'viem'
 import Contracts from "@/contracts";
 import { Link } from "@nextui-org/react";
 
-const BalanceCard = ({ token, address, contract }: { token: string, address: `0x${string}`, contract?: typeof Contracts.sepolia.fulToken }) => {
+const BalanceCard = ({ token, address, contract }: { token: string, address: `0x${string}`, contract?: typeof Contracts.typeDef.fulToken }) => {
 
   const [amount, setAmount] = useState(BigInt(0))
 
@@ -76,11 +76,13 @@ export const UserDetail = () => {
       </h2>
     </header>
     <div className="flex flex-row flex-wrap items-center justify-center w-full gap-5 pt-8 pb-2">
-      <BalanceCard token={'ETH'} address={address} />
-      <BalanceCard token={'FUL'} address={address} contract={Contracts.sepolia.fulToken} />
+      <BalanceCard token={chain.nativeCurrency.symbol} address={address} />
+      <BalanceCard token={'FUL'} address={address} contract={Contracts[selectedNetwork].fulToken} />
     </div>
     <div className={'pt-4'}>
-      <p>Sepolia testnet <Link href={'https://www.infura.io/faucet/sepolia'} target="_blank" rel="noopener" isExternal>(faucet)</Link></p>
+      {/* <p>Sepolia testnet <Link href={'https://www.infura.io/faucet/sepolia'} target="_blank" rel="noopener" isExternal>(faucet)</Link></p> */}
+      <p>Polygon Mumbai <Link href={'https://faucet.polygon.technology/'} target="_blank" rel="noopener" isExternal>(faucet)</Link></p>
+      {/* <p>Op Sepolia testnet <Link href={'https://docs.optimism.io/builders/tools/faucets'} target="_blank" rel="noopener" isExternal>(faucet)</Link></p> */}
     </div>
   </Box>
 }

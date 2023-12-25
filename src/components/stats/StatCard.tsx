@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { publicClient } from '@/config/viem'
 import { formatEther } from 'viem'
+import { chain } from '../auth/Auth'
 
 export const StatCard = ({ item, color }: { item: any, color: string }) => {
   const [amount, setAmount] = useState(BigInt(0))
@@ -36,7 +37,7 @@ export const StatCard = ({ item, color }: { item: any, color: string }) => {
           <div className={'flex flex-row justify-between items-center'}>
             <span className="text-base font-bold tracking-wide uppercase">{item.title}</span>
           </div>
-          <span className={'font-medium text-5xl tracking-tight leading-normal text-center'}>{formatEther(amount)} <span className={'font-medium text-xl tracking-tight leading-normal text-center'}>ETH</span></span>
+          <span className={'font-medium text-5xl tracking-tight leading-normal text-center'}>{formatEther(amount)} <span className={'font-medium text-xl tracking-tight leading-normal text-center'}>{chain.nativeCurrency.symbol}</span></span>
         </div>
       </section>
     </div>

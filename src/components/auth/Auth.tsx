@@ -6,12 +6,34 @@ import {
 } from "@alchemy/aa-accounts";
 import { AlchemyProvider } from "@alchemy/aa-alchemy";
 import { LocalAccountSigner, type Hex } from "@alchemy/aa-core";
-import { sepolia } from "viem/chains";
+import { sepolia, optimismSepolia, baseSepolia, polygonMumbai } from "viem/chains";
 import { ALCHEMY_AA_GAS_POLICY_ID, ALCHEMY_API_KEY } from "@/config/env";
 import { toHex } from 'viem'
 import { useLocalStorage } from "usehooks-ts";
+import { SupportedNetworks } from "@/contracts";
 
-const chain = sepolia;
+// const opSepolia = {
+//   ...optimismSepolia, rpcUrls: {
+//     ...optimismSepolia.rpcUrls,
+//     alchemy: {
+//       http: ["https://opt-sepolia.g.alchemy.com/v2"],
+//       webSocket: ["wss://opt-sepolia.g.alchemy.com/v2"]
+//     }
+//   }
+// }
+// const bSep = {
+//   ...baseSepolia, rpcUrls: {
+//     ...baseSepolia.rpcUrls,
+//     alchemy: {
+//       http: ["https://base-sepolia.g.alchemy.com/v2"],
+//       webSocket: ["wss://base-sepolia.g.alchemy.com/v2"]
+//     }
+//   }
+// }
+
+export const chain = polygonMumbai;
+
+export const selectedNetwork = chain.network as SupportedNetworks
 
 interface IAuthContext { 
   user: User | null, 
@@ -46,7 +68,6 @@ export const Auth = ({ children }: {children: React.ReactElement[] | React.React
     setUserId(user.key)
     const PRIVATE_KEY = toHex((user.key).slice(0,30), {size: 32}) as Hex;
     const owner = LocalAccountSigner.privateKeyToAccountSigner(PRIVATE_KEY);
-
     const provider = new AlchemyProvider({
       apiKey: ALCHEMY_API_KEY,
       chain,

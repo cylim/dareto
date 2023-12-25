@@ -1,7 +1,7 @@
 import { Button, ModalBody, ModalFooter, ModalHeader, Select, SelectItem } from "@nextui-org/react"
 import { useContext, useEffect, useState } from "react"
 import ModalBase from "@/components/layouts/ModalBase"
-import { AuthContext } from "../auth/Auth"
+import { AuthContext, chain, selectedNetwork } from "../auth/Auth"
 import { setDoc } from "@junobuild/core-peer";
 import { ITask } from "@/config/constants";
 import { Input } from "@nextui-org/react";
@@ -47,6 +47,12 @@ export const ChallengeCreateModal = () => {
       const key = `${user.key}-${+new Date()}`;
       const [dAddr] = donationAddress
 
+      const callData = encodeFunctionData({
+        abi: Contracts[selectedNetwork].challenge.abi,
+        functionName: "create",
+        args: [key, dAddr, BigInt(+new Date(deadline) / 1000)],
+      });
+
       toast('Creating challenge task...')
       await setDoc<ITask>({
         collection: "tasks",
@@ -67,15 +73,9 @@ export const ChallengeCreateModal = () => {
         },
       });
 
-      toast('pledging token for completion...')
-      const callData = encodeFunctionData({
-        abi: Contracts.sepolia.challenge.abi,
-        functionName: "create",
-        args: [key, dAddr, BigInt(+new Date(deadline) / 1000)],
-      });
-
+      toast('pledging token for completion...',{duration: 10000})
       const { hash } = await provider.sendUserOperation({
-        target: Contracts.sepolia.challenge.address,
+        target: Contracts[selectedNetwork].challenge.address,
         data: callData,
         value: parseEther(amount) 
       });
@@ -85,7 +85,6 @@ export const ChallengeCreateModal = () => {
       toast(`Created: ${txHash}`)
 
       setShowModal(false);
-
       reload();
     } catch (err) {
       console.error(err);
@@ -117,7 +116,7 @@ export const ChallengeCreateModal = () => {
           <Input variant={'faded'}  label="Title" placeholder="What is your challenge about?" isRequired value={title} onValueChange={setTitle} />
           <Input variant={'faded'} label="Deadline" placeholder="When you should finish it?" type="date" isRequired min={currentDate} value={deadline} onValueChange={setDeadline} />
           <Input variant={'faded'}  label="Staked Amount" placeholder="If not finished on time, how much will you donate?" type="number" min={0.001} step={0.001} isRequired value={amount} onValueChange={setAmount} endContent={
-            <span>ETH</span>
+            <span>{chain.nativeCurrency.symbol}</span>
           } />
           <Select
             variant={'faded'} 

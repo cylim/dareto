@@ -1,9 +1,9 @@
 import { ITask } from "@/config/constants"
 import Contracts from "@/contracts";
 import { setDoc, uploadFile } from "@junobuild/core-peer";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { encodeFunctionData } from 'viem';
-import { AuthContext } from "../auth/Auth";
+import { AuthContext, chain, selectedNetwork } from "../auth/Auth";
 import toast from "react-hot-toast";
 import ExternalIcon from '@/assets/icons/external.svg'
 import { Button, Input } from "@nextui-org/react";
@@ -43,13 +43,13 @@ export const TableItem = ({ item, createdAt, updatedAt }: { item: ITask, created
 
         toast(`Updating Challenge Task`)
         const callData = encodeFunctionData({
-          abi: Contracts.sepolia.challenge.abi,
+          abi: Contracts[selectedNetwork].challenge.abi,
           functionName: "complete",
           args: [item.keyId],
         });
 
         const { hash } = await provider.sendUserOperation({
-          target: Contracts.sepolia.challenge.address,
+          target: Contracts[selectedNetwork].challenge.address,
           data: callData,
         }
         // {paymasterAndData: "0x"}
@@ -96,13 +96,13 @@ export const TableItem = ({ item, createdAt, updatedAt }: { item: ITask, created
 
       toast(`Updating Challenge Task`)
       const callData = encodeFunctionData({
-        abi: Contracts.sepolia.challenge.abi,
+        abi: Contracts[selectedNetwork].challenge.abi,
         functionName: "forfeit",
         args: [item.keyId],
       });
 
       const { hash } = await provider.sendUserOperation({
-        target: Contracts.sepolia.challenge.address,
+        target: Contracts[selectedNetwork].challenge.address,
         data: callData,
       });
 
@@ -159,7 +159,7 @@ export const TableItem = ({ item, createdAt, updatedAt }: { item: ITask, created
         </div>
         <div className="font-normal text-sm flex flex-row gap-1">
           {getCharityName(item.donationAddress)?.title}
-          <div className="font-normal text-sm">({item.amount} ETH)</div>
+          <div className="font-normal text-sm">({item.amount} {chain.nativeCurrency.symbol})</div>
         </div>
       </div>
 

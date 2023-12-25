@@ -85,6 +85,8 @@ This project is for the [ICP Hackathon](https://github.com/ICPHackathon/ICP-Hack
 1. [Blockchain Academy](https://www.talentre.academy/learn/detail?id=3)
 1. [sepolia faucet - infura](https://www.infura.io/faucet/sepolia)
 1. [sepolia faucet - alchemy](https://sepoliafaucet.com/)
+1. [optimism sepolia bridge](https://app.optimism.io/bridge/deposit)
+1. [optimism sepolia faucet](https://faucet.quicknode.com/optimism/)
 
 ### Credits
 1. [Flaticon](Flaticon.com) - Red Panda Logo
