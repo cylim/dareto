@@ -1,13 +1,14 @@
 import { InternetIdentityProvider, signIn } from "@junobuild/core-peer";
 import SignInIcon from "@/assets/icons/SignIn.svg"
 import { Button } from "@nextui-org/react";
+import { SATELITE_ID } from "@/config/env";
 
 export const Login = () => {
   return (
     <Button
       type="button"
       onClick={async () => await signIn({
-        derivationOrigin: 'https://ivvrr-viaaa-aaaal-adhzq-cai.icp0.io',
+        derivationOrigin: `https://${SATELITE_ID}.icp0.io`,
         // provider: new NFIDProvider({
         //   appName: "Dare.to",
         //   logoUrl: "https://dareto.monify.xyz/_next/static/media/logo.57de1e03.png",
