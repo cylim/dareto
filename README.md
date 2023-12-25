@@ -60,8 +60,10 @@ After `npm run build`, the bundle output directory called `out` can be used as t
 1. Challenge other - use case: Escrow.
 
 ## Tech Stack
+```
 frontend: Nextjs, Tailwindcss
 infra: Juno.build - utilized ICP to achieve Hosting, Storage and Datastore.
+```
 
 ### ICP
 ```

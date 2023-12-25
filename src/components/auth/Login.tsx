@@ -7,6 +7,7 @@ export const Login = () => {
     <Button
       type="button"
       onClick={async () => await signIn({
+        derivationOrigin: 'https://ivvrr-viaaa-aaaal-adhzq-cai.icp0.io',
         // provider: new NFIDProvider({
         //   appName: "Dare.to",
         //   logoUrl: "https://dareto.monify.xyz/_next/static/media/logo.57de1e03.png",
