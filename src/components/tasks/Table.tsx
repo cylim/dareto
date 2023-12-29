@@ -8,10 +8,12 @@ import { Login } from "../auth/Login";
 import { TableItem } from "./TableItem";
 import { useReadLocalStorage } from "usehooks-ts";
 
+
+
 export const Table = () => {
   const userId = useReadLocalStorage<string>('id:userid')
-  const { user } = useContext(AuthContext);
-  const [items, setItems] = useState<Doc<ITask>[]>([]);
+  const { user, challenger } = useContext(AuthContext);
+  const [items, setItems] = useState<ITask[]>([]);
 
   useEffect(() => {
     window.addEventListener("reload", list);
@@ -22,18 +24,25 @@ export const Table = () => {
   }, []);
 
   const list = async () => {
-    if(!user?.key && !userId) return
+    if(!challenger) return
 
-    const { items } = await listDocs<ITask>({
-      collection: "tasks",
-      filter: {
-        order: {
-          desc: true,
-          field: 'created_at'
-        },
-        owner: user?.key || userId || 'hjucn-tqcmv-so34n-uhk5k-aytjd-rn2cu-fqyar-byulg-ta2x7-7bdk6-qqe'
-      },
-    });
+    // const who = await challenger.whoami();
+    // console.log(who)
+    // const anon = await challenger.isAnonymous();
+    // console.log(anon)
+    const items = await challenger.tasks();
+    console.log(items)
+
+    // const { items } = await listDocs<ITask>({
+    //   collection: "tasks",
+    //   filter: {
+    //     order: {
+    //       desc: true,
+    //       field: 'created_at'
+    //     },
+    //     owner: user?.key || userId || 'hjucn-tqcmv-so34n-uhk5k-aytjd-rn2cu-fqyar-byulg-ta2x7-7bdk6-qqe'
+    //   },
+    // });
 
     setItems(items);
   };
@@ -47,8 +56,8 @@ export const Table = () => {
     (async () => await list())();
   }, [user]);
 
-  const renderTableItem = ({ key, data, created_at, updated_at }: Doc<ITask>) => {
-    return <TableItem key={key} item={data} createdAt={created_at} updatedAt={updated_at} />
+  const renderTableItem = (item: ITask) => {
+    return <TableItem key={item.keyId} item={item}/>
   }
 
   return (

@@ -10,9 +10,9 @@ import { Button, Input } from "@nextui-org/react";
 import { charities } from "@/config/charities";
 
 
-export const TableItem = ({ item, createdAt, updatedAt }: { item: ITask, createdAt: bigint | undefined, updatedAt: bigint | undefined }) => {
+export const TableItem = ({ item }: { item: ITask}) => {
   const [loading, setLoading] = useState(false)
-  const { user, provider } = useContext(AuthContext)
+  const { user, provider, challenger } = useContext(AuthContext)
   const [file, setFile] = useState<File | undefined>();
 
   const reload = () => {
@@ -42,39 +42,42 @@ export const TableItem = ({ item, createdAt, updatedAt }: { item: ITask, created
         });
 
         toast(`Updating Challenge Task`)
-        const callData = encodeFunctionData({
-          abi: Contracts[selectedNetwork].challenge.abi,
-          functionName: "complete",
-          args: [item.keyId],
-        });
+        const result = await challenger.complete(item.keyId, downloadUrl, '0x');
+        console.log(result)
 
-        const { hash } = await provider.sendUserOperation({
-          target: Contracts[selectedNetwork].challenge.address,
-          data: callData,
-        }
-        // {paymasterAndData: "0x"}
-        );
-        console.log('hash', hash)
+        // const callData = encodeFunctionData({
+        //   abi: Contracts[selectedNetwork].challenge.abi,
+        //   functionName: "complete",
+        //   args: [item.keyId],
+        // });
 
-        const txHash = await provider.waitForUserOperationTransaction(hash);
-        console.log('txHash', txHash)
+        // const { hash } = await provider.sendUserOperation({
+        //   target: Contracts[selectedNetwork].challenge.address,
+        //   data: callData,
+        // }
+        // // {paymasterAndData: "0x"}
+        // );
+        // console.log('hash', hash)
 
-        await setDoc<ITask>({
-          collection: "tasks",
-          doc: {
-            key: item.keyId,
-            created_at: createdAt,
-            updated_at: updatedAt,
-            data: {
-              ...item,
-              status: 'completed',
-              completionTimestamp: +new Date(),
-              proofUrl: downloadUrl,
-              txHash: txHash
-            },
-          },
-        });
-        toast(`Done: ${txHash}`)
+        // const txHash = await provider.waitForUserOperationTransaction(hash);
+        // console.log('txHash', txHash)
+
+        // await setDoc<ITask>({
+        //   collection: "tasks",
+        //   doc: {
+        //     key: item.keyId,
+        //     created_at: createdAt,
+        //     updated_at: updatedAt,
+        //     data: {
+        //       ...item,
+        //       status: 'completed',
+        //       completionTimestamp: +new Date(),
+        //       proofUrl: downloadUrl,
+        //       txHash: txHash
+        //     },
+        //   },
+        // });
+        // toast(`Done: ${txHash}`)
 
         reload()
         let event = new Event("reloadUser");
@@ -100,30 +103,32 @@ export const TableItem = ({ item, createdAt, updatedAt }: { item: ITask, created
         functionName: "forfeit",
         args: [item.keyId],
       });
+      
+      const result = await challenger.forfeit(item.keyId, '0x');
+      console.log(result)
+      // const { hash } = await provider.sendUserOperation({
+      //   target: Contracts[selectedNetwork].challenge.address,
+      //   data: callData,
+      // });
 
-      const { hash } = await provider.sendUserOperation({
-        target: Contracts[selectedNetwork].challenge.address,
-        data: callData,
-      });
+      // const txHash = await provider.waitForUserOperationTransaction(hash);
+      // console.log(txHash)
 
-      const txHash = await provider.waitForUserOperationTransaction(hash);
-      console.log(txHash)
-
-      await setDoc<ITask>({
-        collection: "tasks",
-        doc: {
-          key: item.keyId,
-          created_at: createdAt,
-          updated_at: updatedAt,
-          data: {
-            ...item,
-            status: 'failed',
-            completionTimestamp: +new Date(),
-            txHash: txHash
-          },
-        },
-      });
-      toast(`Done: ${txHash}`)
+      // await setDoc<ITask>({
+      //   collection: "tasks",
+      //   doc: {
+      //     key: item.keyId,
+      //     created_at: createdAt,
+      //     updated_at: updatedAt,
+      //     data: {
+      //       ...item,
+      //       status: 'failed',
+      //       completionTimestamp: +new Date(),
+      //       txHash: txHash
+      //     },
+      //   },
+      // });
+      // toast(`Done: ${txHash}`)
 
       reload()
       let event = new Event("reloadFund");
@@ -155,7 +160,7 @@ export const TableItem = ({ item, createdAt, updatedAt }: { item: ITask, created
       </div>
       <div className="font-medium text-base flex flex-col grow items-end">
         <div >
-          {new Date(item.deadlineTimestamp).toLocaleDateString()}
+          {new Date(+item.deadlineTimestamp.toString() /1000 ).toLocaleDateString()}
         </div>
         <div className="font-normal text-sm flex flex-row gap-1">
           {getCharityName(item.donationAddress)?.title}

@@ -18,7 +18,7 @@ export const ChallengeCreateModal = () => {
   const [donationAddress, setDonationAddress] = useState<any>(new Set([]))
   const [amount, setAmount] = useState("")
   const [deadline, setDeadline] = useState<any>(new Date(+new Date() + 24 * 60 * 60 * 1000))
-  const { user, address, provider } = useContext(AuthContext);
+  const { user, address, provider, challenger } = useContext(AuthContext);
 
   useEffect(() => {
     const [dAddr] = donationAddress
@@ -54,35 +54,37 @@ export const ChallengeCreateModal = () => {
       });
 
       toast('Creating challenge task...')
-      await setDoc<ITask>({
-        collection: "tasks",
-        doc: {
-          key,
-          data: {
-            keyId: key,
-            userId: user.key,
-            userAddress: address || '', 
-            title: title,
-            status: 'pending',
-            amount: amount || '0',
-            donationAddress: dAddr,
-            deadlineTimestamp: +new Date(deadline),
-            completionTimestamp: 0,
-            proofUrl: '',
-          },
-        },
-      });
+      const result = await challenger.add( key, title, BigInt(+new Date(deadline) * 1000), amount, dAddr )
+      // await setDoc<ITask>({
+      //   collection: "tasks",
+      //   doc: {
+      //     key,
+      //     data: {
+      //       keyId: key,
+      //       userId: user.key,
+      //       userAddress: address || '', 
+      //       title: title,
+      //       status: 'pending',
+      //       amount: amount || '0',
+      //       donationAddress: dAddr,
+      //       deadlineTimestamp: +new Date(deadline),
+      //       completionTimestamp: 0,
+      //       proofUrl: '',
+      //     },
+      //   },
+      // });
+      console.log(result)
 
       toast('pledging token for completion...',{duration: 10000})
-      const { hash } = await provider.sendUserOperation({
-        target: Contracts[selectedNetwork].challenge.address,
-        data: callData,
-        value: parseEther(amount) 
-      });
+      // const { hash } = await provider.sendUserOperation({
+      //   target: Contracts[selectedNetwork].challenge.address,
+      //   data: callData,
+      //   value: parseEther(amount) 
+      // });
 
-      const txHash = await provider.waitForUserOperationTransaction(hash);
-      console.log(txHash)
-      toast(`Created: ${txHash}`)
+      // const txHash = await provider.waitForUserOperationTransaction(hash);
+      // console.log(txHash)
+      // toast(`Created: ${txHash}`)
 
       setShowModal(false);
       reload();

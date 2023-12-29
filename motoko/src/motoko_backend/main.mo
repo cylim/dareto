@@ -15,7 +15,7 @@ actor Challenger {
     status : Text;
     deadlineTimestamp : Time.Time;
     completionTimestamp : Time.Time;
-    amount : Int;
+    amount : Text;
     donationAddress : Text;
     proofUrl : Text;
     txHash : Text;
@@ -62,8 +62,8 @@ actor Challenger {
     };
   };
 
-  public shared ({ caller : Principal }) func add(keyId : Text, title : Text, deadline : Time.Time, amount : Int, donationAddress : Text) : async () {
-    assert (Principal.isAnonymous(caller) != false);
+  public shared ({ caller : Principal }) func add(keyId : Text, title : Text, deadline : Time.Time, amount : Text, donationAddress : Text) : async () {
+    assert (Principal.isAnonymous(caller) == false);
 
     let task : Task = {
       keyId = keyId;
