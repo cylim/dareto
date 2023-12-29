@@ -1,4 +1,5 @@
 export const SATELITE_ID = process.env.NEXT_PUBLIC_JUNO_SATELITE || ''
 export const ALCHEMY_API_KEY = process.env.NEXT_PUBLIC_ALCHEMY_API_KEY || ''
 export const ALCHEMY_AA_GAS_POLICY_ID = process.env.NEXT_PUBLIC_ALCHEMY_AA_GAS_POLICY_ID || ''
-export const CHALLENGER_CANISTER_ID = process.env.NEXT_PUBLIC_CHALLENGER_CANISTER_ID || 'ule7a-cqaaa-aaaak-qcx4a-cai'
+export const CHALLENGER_CANISTER_ID = (process.env.NEXT_PUBLIC_NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_CHALLENGER_CANISTER_ID : process.env.NEXT_PUBLIC_CHALLENGER_CANISTER_ID_DEV) || 'ule7a-cqaaa-aaaak-qcx4a-cai'
+export const CHALLENGER_CANISTER_HOST = (process.env.NEXT_PUBLIC_NODE_ENV === 'production' ? 'https://icp-api.io' : 'http://127.0.0.1:4943') || 'https://icp-api.io'
