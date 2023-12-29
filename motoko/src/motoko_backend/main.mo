@@ -123,4 +123,7 @@ actor Challenger {
   public shared (msg) func whoami() : async Principal {
       msg.caller
   };
+  public shared (msg) func isAnonymous() : async Bool {
+      Principal.isAnonymous(msg.caller)
+  };
 };
